@@ -1,7 +1,7 @@
 $(document).ready(function(){
 
     fetch_data();
-    let sale_chart;
+    let myChart;
     function fetch_data(start_date = '', end_date = '')
     {
 
@@ -22,42 +22,41 @@ $(document).ready(function(){
             }
         },
 
-        "drawCallback" : function(settings)
-        {
+        "drawCallback" : function(settings){
             console.log('settings ',settings.aoData)
-            let sales_date = [];
-            let sale = [];
+            let axisX = [];
+            let axisY = [];
 
             for(let count = 0; count < settings.aoData.length; count++)
             {
-                sales_date.push(settings.aoData[count]._aData[2]); //date axis X
+                axisX.push(settings.aoData[count]._aData[2]); //date axis X
                 //console.log('settings.aoData ',settings.aoData[count]._aData[2])
-                sale.push(parseFloat(settings.aoData[count]._aData[1])); //sales axis Y
+                axisY.push(parseFloat(settings.aoData[count]._aData[1])); //sales axis Y
             }
 
-            let chart_data = {
-                labels:sales_date,
+            let chartData = {
+                labels: axisX,
                 datasets:[
                     {
                         label : 'Sales',
                         backgroundColor : 'rgba(153, 102, 255)',
                         color : '#fff',
-                        data:sale
+                        data: axisY
                     }
                 ]
             };
 
             let group_chart3 = $('#bar_chart');
 
-            if(sale_chart)
+            if(myChart)
             {
-                console.log('sale_chart.destroy()')
-                sale_chart.destroy();
+                console.log('myChart.destroy()')
+                myChart.destroy();
             }
 
-            sale_chart = new Chart(group_chart3, {
+            myChart = new Chart(group_chart3, {
                 type:'bar',
-                data:chart_data
+                data:chartData
             });
         }
     });

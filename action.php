@@ -2,7 +2,7 @@
 
 //action.php
 
-$connect = new PDO("mysql:host=localhost;dbname=date_picker_chart", "root", "");
+$connect = new PDO("mysql:host=localhost;dbname=db_chart", "root", "Cubo.Rubik19");
 
 if(isset($_POST["action"]))
 {
